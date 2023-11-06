@@ -38,6 +38,36 @@ class Channel:
 
     def to_json(self, file_json) -> None:
         """Сохранение в файл значения атрибутов экземпляра Channel"""
-        attribute_data = {"channel_id":self.__channel_id, "title":self.title,"description":self.description, "url":self.url, "subscriberCount":self.subscriberCount,"videoCount":self.video_count,"viewCount":self.viewCount}
-        with open(file_json, 'w',  encoding='windows-1251') as file:
+        attribute_data = {"channel_id": self.__channel_id, "title": self.title, "description": self.description,
+                          "url": self.url, "subscriberCount": self.subscriberCount, "videoCount": self.video_count,
+                          "viewCount": self.viewCount}
+        with open(file_json, 'w', encoding='windows-1251') as file:
             json.dump(attribute_data, file, indent=2, ensure_ascii=False)
+
+    def __str__(self):
+        """Возвращает название и ссылку на канал по шаблону <название_канала> (<ссылка_на_канал>)"""
+        return f'{self.__channel_id} ({self.url})'
+
+    def __add__(self, other):
+        """Метод для операции сложения"""
+        return int(self.subscriberCount) + int(other.subscriberCount)
+
+    def __sub__(self, other):
+        """Метод для операции вычитания"""
+        return int(self.subscriberCount) - int(other.subscriberCount)
+
+    def __lt__(self, other):
+        """Метод для операции сравнения меньше"""
+        return int(self.subscriberCount) < int(other.subscriberCount)
+
+    def __le__(self, other):
+        """Метод для операции сравнения меньше или равно"""
+        return int(self.subscriberCount) <= int(other.subscriberCount)
+
+    def __gt__(self, other):
+        """Метод для операции сравнения больше"""
+        return int(self.subscriberCount) > int(other.subscriberCount)
+
+    def __ge__(self, other):
+        """Метод для операции сравнения больше или равно"""
+        return int(self.subscriberCount) >= int(other.subscriberCount)
