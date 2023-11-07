@@ -71,3 +71,7 @@ class Channel:
     def __ge__(self, other):
         """Метод для операции сравнения больше или равно"""
         return int(self.subscriberCount) >= int(other.subscriberCount)
+
+    def __eq__(self, other):
+        """Метод для операции эквивалентности'"""
+        return int(self.subscriberCount) == int(other.subscriberCount)
