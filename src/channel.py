@@ -20,7 +20,7 @@ class Channel:
 
     def print_info(self) -> None:
         """Вывод информации о канале"""
-        channal_data = json.dumps(self.__channel_id, indent=2, ensure_ascii=False)
+        channal_data = json.dumps(self.channel, indent=2, ensure_ascii=False)
         print(channal_data)
 
     @classmethod
