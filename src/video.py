@@ -3,6 +3,7 @@ from googleapiclient.discovery import build
 
 
 class Video:
+    """Класс для видео на ютуб"""
     api_key: str = os.getenv('YT_API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -22,6 +23,7 @@ class Video:
 
 
 class PLVideo(Video):
+    """Дочерний класс плейлистов ютуба, наcлдеуется от класса Video"""
     def __init__(self, video_id, playlist_id):
         super().__init__(video_id)
         self.channelId = self.video["items"][0]["snippet"]["channelId"]
