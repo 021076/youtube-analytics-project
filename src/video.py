@@ -1,7 +1,5 @@
 import os
 from googleapiclient.discovery import build
-
-
 class Video:
     """Класс для видео на ютуб"""
     api_key: str = os.getenv('YT_API_KEY')
@@ -19,7 +17,8 @@ class Video:
     def __str__(self):
         """Возвращает название видео"""
         return f'{self.title}'
-        # return f'{json.dumps(self.video, indent=2, ensure_ascii=False)}' -- вся информация по видео для анализа
+        # вся информация по видео для анализа
+        # return f'{json.dumps(self.video, indent=2, ensure_ascii=False)}'
 
 
 class PLVideo(Video):
@@ -27,12 +26,12 @@ class PLVideo(Video):
     def __init__(self, video_id, playlist_id):
         super().__init__(video_id)
         self.channelId = self.video["items"][0]["snippet"]["channelId"]
-        playlists = self.youtube.playlists().list(channelId=self.channelId,
-                                                  part='contentDetails,snippet',
-                                                  maxResults=50,
-                                                  ).execute()
         self.playlist_id = playlist_id
         # вывод всех плейлистов, проверка наличия нужного
+        # playlists = self.youtube.playlists().list(channelId=self.channelId,
+        #                                           part='contentDetails,snippet',
+        #                                           maxResults=50,
+        #                                           ).execute()
         # for playlist in playlists['items']:
         #     print(playlist)
         #     print()
