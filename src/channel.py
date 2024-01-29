@@ -30,6 +30,7 @@ class Channel:
 
     @property
     def channel_id(self):
+        """Устанавливает приватный режим для атрибута channel_id"""
         return self.__channel_id
 
     # @channel_id.setter
@@ -39,6 +40,7 @@ class Channel:
     #     self.__channel_id = value
 
     def to_json(self, file_json) -> None:
+        """ Сохраняет в файл json значения атрибутов экземпляра `Channel` """
         attribute_data = {"channel_id": self.__channel_id, "title": self.title, "description": self.description,
                           "url": self.url, "subscriberCount": self.subscriberCount, "videoCount": self.video_count,
                           "viewCount": self.viewCount}
