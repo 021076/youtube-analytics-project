@@ -34,10 +34,13 @@ class Channel:
 
     # @channel_id.setter
     # def channel_id(self, value):
+    #     """используем, если нужно иметь возможность присваивать значение атрибуту channel_id, закомментировано чтобы показать,
+    #     что без setter будет ошибка AttributeError: property 'channel_id' of 'Channel' object has no setter (см. main.py)"""
     #     self.__channel_id = value
 
     def to_json(self, file_json) -> None:
-        """Сохранение в файл значения атрибутов экземпляра Channel"""
-        attribute_data = {"channel_id":self.__channel_id, "title":self.title,"description":self.description, "url":self.url, "subscriberCount":self.subscriberCount,"videoCount":self.video_count,"viewCount":self.viewCount}
-        with open(file_json, 'w',  encoding='windows-1251') as file:
+        attribute_data = {"channel_id": self.__channel_id, "title": self.title, "description": self.description,
+                          "url": self.url, "subscriberCount": self.subscriberCount, "videoCount": self.video_count,
+                          "viewCount": self.viewCount}
+        with open(file_json, 'w', encoding='windows-1251') as file:
             json.dump(attribute_data, file, indent=2, ensure_ascii=False)
