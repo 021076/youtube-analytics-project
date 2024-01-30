@@ -20,7 +20,7 @@ class Channel:
 
     def print_info(self) -> None:
         """Вывод информации о канале"""
-        channal_data = json.dumps(self.channel, indent=2, ensure_ascii=False)
+        channal_data = json.dumps(self.__channel_id, indent=2, ensure_ascii=False)
         print(channal_data)
 
     @classmethod
@@ -30,14 +30,17 @@ class Channel:
 
     @property
     def channel_id(self):
+        """Устанавливает приватный режим для атрибута channel_id"""
         return self.__channel_id
 
     # @channel_id.setter
     # def channel_id(self, value):
+    #     """используем, если нужно иметь возможность присваивать значение атрибуту channel_id, закомментировано чтобы показать,
+    #     что без setter будет ошибка AttributeError: property 'channel_id' of 'Channel' object has no setter (см. main.py)"""
     #     self.__channel_id = value
 
     def to_json(self, file_json) -> None:
-        """Сохранение в файл значения атрибутов экземпляра Channel"""
+        """ Сохраняет в файл json значения атрибутов экземпляра `Channel` """
         attribute_data = {"channel_id": self.__channel_id, "title": self.title, "description": self.description,
                           "url": self.url, "subscriberCount": self.subscriberCount, "videoCount": self.video_count,
                           "viewCount": self.viewCount}
