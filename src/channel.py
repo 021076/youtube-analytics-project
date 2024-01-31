@@ -14,9 +14,10 @@ class Channel:
         self.title = self.channel["items"][0]["snippet"]["title"]
         self.description = self.channel["items"][0]["snippet"]["description"]
         self.url = f'https://www.youtube.com/{self.__channel_id}'
-        self.subscriberCount = self.channel["items"][0]["statistics"]["subscriberCount"]
-        self.video_count = self.channel["items"][0]["statistics"]["videoCount"]
-        self.viewCount = self.channel["items"][0]["statistics"]["viewCount"]
+        self.subscriberCount = int(self.channel["items"][0]["statistics"]["subscriberCount"])
+        self.video_count = int(self.channel["items"][0]["statistics"]["videoCount"])
+        self.viewCount = int(self.channel["items"][0]["statistics"]["viewCount"])
+        # Уточнение наставника: для атрибутов subscriberCount, video_count, viewCount более корректно будет указать тип (int) на этапе инициалазации
 
     def print_info(self) -> None:
         """Вывод информации о канале"""
@@ -49,32 +50,41 @@ class Channel:
 
     def __str__(self):
         """Возвращает название и ссылку на канал по шаблону <название_канала> (<ссылка_на_канал>)"""
-        return f'{self.__channel_id} ({self.url})'
+        return f'{self.title} ({self.url})'
 
+    # Исправление по уточнению наставника: в методах выполнения операций на числах укзаывать типа атрибута subscriberCount не требуется
+    # параметры атрибута subscriberCount исправлены в __init__, для атрибута указан тип int
     def __add__(self, other):
         """Метод для операции сложения"""
-        return int(self.subscriberCount) + int(other.subscriberCount)
+        # return int(self.subscriberCount) + int(other.subscriberCount)
+        return self.subscriberCount + other.subscriberCount
 
     def __sub__(self, other):
         """Метод для операции вычитания"""
-        return int(self.subscriberCount) - int(other.subscriberCount)
+        # return int(self.subscriberCount) - int(other.subscriberCount)
+        return self.subscriberCount - other.subscriberCount
 
     def __lt__(self, other):
         """Метод для операции сравнения меньше"""
-        return int(self.subscriberCount) < int(other.subscriberCount)
+        # return int(self.subscriberCount) < int(other.subscriberCount)
+        return self.subscriberCount < other.subscriberCount
 
     def __le__(self, other):
         """Метод для операции сравнения меньше или равно"""
-        return int(self.subscriberCount) <= int(other.subscriberCount)
+        # return int(self.subscriberCount) <= int(other.subscriberCount)
+        return self.subscriberCount <= other.subscriberCount
 
     def __gt__(self, other):
         """Метод для операции сравнения больше"""
-        return int(self.subscriberCount) > int(other.subscriberCount)
+        # return int(self.subscriberCount) > int(other.subscriberCount)
+        return self.subscriberCount > other.subscriberCount
 
     def __ge__(self, other):
         """Метод для операции сравнения больше или равно"""
-        return int(self.subscriberCount) >= int(other.subscriberCount)
+        # return int(self.subscriberCount) >= int(other.subscriberCount)
+        return self.subscriberCount >= other.subscriberCount
 
     def __eq__(self, other):
-        """Метод для операции эквивалентности'"""
-        return int(self.subscriberCount) == int(other.subscriberCount)
+        """Метод для операции эквивалентности"""
+        # return int(self.subscriberCount) == int(other.subscriberCount)
+        return self.subscriberCount == other.subscriberCount
