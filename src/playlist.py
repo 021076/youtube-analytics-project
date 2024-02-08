@@ -26,7 +26,7 @@ class PlayList:
 
     @property
     def total_duration(self):
-        """возвращает суммарную длительность плейлиста"""
+        """Возвращает суммарную длительность плейлиста"""
         total_duration = 0
         for video in self.video_response['items']:
             iso_8601_duration = video['contentDetails']['duration']
@@ -35,7 +35,7 @@ class PlayList:
         return datetime.timedelta(seconds=total_duration)
 
     def show_best_video(self):
-        """возвращает ссылку на самое популярное видео из плейлиста (по количеству лайков)"""
+        """Возвращает ссылку на самое популярное видео из плейлиста (по количеству лайков)"""
         video_like = {}
         for video in self.video_response['items']:
             video_like[f"{video['id']}"] = int(video['statistics']['likeCount'])
