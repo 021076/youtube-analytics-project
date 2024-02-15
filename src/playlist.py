@@ -39,5 +39,9 @@ class PlayList:
         video_like = {}
         for video in self.video_response['items']:
             video_like[f"{video['id']}"] = int(video['statistics']['likeCount'])
-        max_video_like = max(video_like.values())
-        return f'https://youtu.be/{(list(video_like.keys())[list(video_like.values()).index(max_video_like)])}'
+        # max_video_like = max(video_like.values()
+        # получение id видео с максимальным количеством лайков
+        max_like_video_id = max(video_like, key=video_like.get)
+        # ссылка к видео с максимальным количеством лайков
+        return f'https://youtu.be/{max_like_video_id}'
+        # return f'https://youtu.be/{(list(video_like.keys())[list(video_like.values()).index(max_video_like)])}'
