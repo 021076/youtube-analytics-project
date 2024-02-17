@@ -7,14 +7,33 @@ class Video:
     api_key: str = os.getenv('YT_API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
+    # def __init__(self, video_id: str):
+    #     self.video_id = video_id
+    #     self.url = f'https://www.youtube.com/{self.video_id}'
+    #     self.video = self.youtube.videos().list(id=self.video_id,
+    #                                             part='snippet,statistics,contentDetails,topicDetails').execute()
+    #     self.title = self.video["items"][0]["snippet"]["title"]
+    #     self.url = f'https://www.youtube.com/{self.video_id}'
+    #     self.viewCount = self.video["items"][0]["statistics"]["viewCount"]
+    #     self.likeCount = self.video["items"][0]["statistics"]["likeCount"]
+
     def __init__(self, video_id: str):
         self.video_id = video_id
+        self.url = f'https://www.youtube.com/{self.video_id}'
         self.video = self.youtube.videos().list(id=self.video_id,
                                                 part='snippet,statistics,contentDetails,topicDetails').execute()
-        self.title = self.video["items"][0]["snippet"]["title"]
-        self.url = f'https://www.youtube.com/{self.video_id}'
-        self.viewCount = self.video["items"][0]["statistics"]["viewCount"]
-        self.likeCount = self.video["items"][0]["statistics"]["likeCount"]
+        try:
+            if self.video["items"] == []:
+                raise Exception('Передан несуществующий id видео')
+                self.title = None
+                self.viewCount = None
+                self.likeCount = None
+        except Exception:
+            raise
+        else:
+            self.title = self.video["items"][0]["snippet"]["title"]
+            self.viewCount = self.video["items"][0]["statistics"]["viewCount"]
+            self.likeCount = self.video["items"][0]["statistics"]["likeCount"]
 
     def __str__(self):
         """Возвращает название видео"""
